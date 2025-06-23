@@ -21,7 +21,7 @@ function calculateDistance(userScore: Score, philosopherScore: Score): number {
   return distance;
 }
 
-export default function ResultPage({
+export default async function ResultPage({
   searchParams,
 }: {
   searchParams: {
