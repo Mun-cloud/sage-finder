@@ -24,7 +24,13 @@ function calculateDistance(userScore: Score, philosopherScore: Score): number {
 export default function ResultPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: {
+    se: string;
+    ic: string;
+    ir: string;
+    cp: string;
+    ms: string;
+  };
 }) {
   const userScore: Score = {
     rationalism_empiricism: Number(searchParams.se || 0),
