@@ -6,7 +6,12 @@ import { Score } from "@/app/lib/utils";
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
 
-export default function QuestionPage({ params }: { params: { id: string } }) {
+type Props = {
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+export default function QuestionPage({ params }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const questionId = parseInt(params.id, 10);
