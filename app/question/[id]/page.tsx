@@ -1,20 +1,16 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { questions } from "@/app/lib/data";
 import { Score } from "@/app/lib/utils";
 import Link from "next/link";
 import { useEffect, useMemo } from "react";
 
-type Props = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default function QuestionPage({ params }: Props) {
+export default function QuestionPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const questionId = parseInt(params.id, 10);
+  const params = useParams();
+  const questionId = parseInt(params.id as string, 10);
   const currentQuestion = questions.find((q) => q.id === questionId);
 
   // Get scores from URL or initialize to 0
