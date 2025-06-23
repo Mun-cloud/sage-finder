@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { questions } from "@/app/lib/data";
 import { Score } from "@/app/lib/utils";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 export default function QuestionPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -13,13 +13,16 @@ export default function QuestionPage({ params }: { params: { id: string } }) {
   const currentQuestion = questions.find((q) => q.id === questionId);
 
   // Get scores from URL or initialize to 0
-  const currentScores: Score = {
-    rationalism_empiricism: Number(searchParams.get("se") || 0),
-    individualism_collectivism: Number(searchParams.get("ic") || 0),
-    idealism_realism: Number(searchParams.get("ir") || 0),
-    conservatism_progressivism: Number(searchParams.get("cp") || 0),
-    materialism_spiritualism: Number(searchParams.get("ms") || 0),
-  };
+  const currentScores: Score = useMemo(
+    () => ({
+      rationalism_empiricism: Number(searchParams.get("se") || 0),
+      individualism_collectivism: Number(searchParams.get("ic") || 0),
+      idealism_realism: Number(searchParams.get("ir") || 0),
+      conservatism_progressivism: Number(searchParams.get("cp") || 0),
+      materialism_spiritualism: Number(searchParams.get("ms") || 0),
+    }),
+    [searchParams]
+  );
 
   // If no question is found (end of quiz), redirect to results page
   useEffect(() => {
