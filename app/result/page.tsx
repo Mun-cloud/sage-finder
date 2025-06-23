@@ -24,20 +24,15 @@ function calculateDistance(userScore: Score, philosopherScore: Score): number {
 export default async function ResultPage({
   searchParams,
 }: {
-  searchParams: {
-    se: string;
-    ic: string;
-    ir: string;
-    cp: string;
-    ms: string;
-  };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+  const params = await searchParams;
   const userScore: Score = {
-    rationalism_empiricism: Number(searchParams.se || 0),
-    individualism_collectivism: Number(searchParams.ic || 0),
-    idealism_realism: Number(searchParams.ir || 0),
-    conservatism_progressivism: Number(searchParams.cp || 0),
-    materialism_spiritualism: Number(searchParams.ms || 0),
+    rationalism_empiricism: Number(params.se || 0),
+    individualism_collectivism: Number(params.ic || 0),
+    idealism_realism: Number(params.ir || 0),
+    conservatism_progressivism: Number(params.cp || 0),
+    materialism_spiritualism: Number(params.ms || 0),
   };
 
   const resultFn = () => {
