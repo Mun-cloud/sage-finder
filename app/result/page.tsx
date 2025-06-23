@@ -2,6 +2,8 @@ import { philosophers } from "@/app/lib/data";
 import { Philosopher, Score } from "@/app/lib/utils";
 import Link from "next/link";
 
+export const runtime = "edge";
+
 function calculateDistance(userScore: Score, philosopherScore: Score): number {
   const keys: (keyof Score)[] = [
     "rationalism_empiricism",

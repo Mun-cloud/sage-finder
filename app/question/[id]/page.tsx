@@ -1,43 +1,26 @@
-"use client";
-
-import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { questions } from "@/app/lib/data";
 import { Score } from "@/app/lib/utils";
 import Link from "next/link";
-import { useEffect, useMemo } from "react";
 
-export default function QuestionPage() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const params = useParams();
+export const runtime = "edge";
+
+export default async function QuestionPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const params = await searchParams;
   const questionId = parseInt(params.id as string, 10);
   const currentQuestion = questions.find((q) => q.id === questionId);
 
   // Get scores from URL or initialize to 0
-  const currentScores: Score = useMemo(
-    () => ({
-      rationalism_empiricism: Number(searchParams.get("se") || 0),
-      individualism_collectivism: Number(searchParams.get("ic") || 0),
-      idealism_realism: Number(searchParams.get("ir") || 0),
-      conservatism_progressivism: Number(searchParams.get("cp") || 0),
-      materialism_spiritualism: Number(searchParams.get("ms") || 0),
-    }),
-    [searchParams]
-  );
-
-  // If no question is found (end of quiz), redirect to results page
-  useEffect(() => {
-    if (!currentQuestion) {
-      const queryString = new URLSearchParams({
-        se: currentScores.rationalism_empiricism.toString(),
-        ic: currentScores.individualism_collectivism.toString(),
-        ir: currentScores.idealism_realism.toString(),
-        cp: currentScores.conservatism_progressivism.toString(),
-        ms: currentScores.materialism_spiritualism.toString(),
-      }).toString();
-      router.push(`/result?${queryString}`);
-    }
-  }, [currentQuestion, router, currentScores]);
+  const currentScores: Score = {
+    rationalism_empiricism: Number(params.se || 0),
+    individualism_collectivism: Number(params.ic || 0),
+    idealism_realism: Number(params.ir || 0),
+    conservatism_progressivism: Number(params.cp || 0),
+    materialism_spiritualism: Number(params.ms || 0),
+  };
 
   if (!currentQuestion) {
     return (
