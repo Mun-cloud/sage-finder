@@ -67,11 +67,15 @@ export default async function QuestionPage({
             }).toString();
 
             const nextQuestionId = questionId + 1;
+            const isLastQuestion = questionId === questions.length;
+            const href = isLastQuestion
+              ? `/result?${queryString}`
+              : `/question/${nextQuestionId}?${queryString}`;
 
             return (
               <Link
                 key={index}
-                href={`/question/${nextQuestionId}?${queryString}`}
+                href={href}
                 className="bg-gray-800 text-white font-semibold py-4 px-6 rounded-lg hover:bg-gray-700 transition-colors text-center text-lg"
               >
                 {answer.text}

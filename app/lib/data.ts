@@ -46,6 +46,82 @@ export const philosophers: Philosopher[] = [
       materialism_spiritualism: -3,
     },
   },
+  {
+    id: 4,
+    name: "이마누엘 칸트",
+    period: "근대 독일",
+    description:
+      "도덕적 의무와 이성을 중시한 철학자입니다. '정언명령'이라는 개념을 통해, 어떤 상황에서든 보편적으로 적용될 수 있는 도덕 법칙을 따라야 한다고 주장했습니다.",
+    quote:
+      "네 의지의 준칙이 언제나 동시에 보편적 입법의 원리가 될 수 있도록 행위하라.",
+    scores: {
+      rationalism_empiricism: -4,
+      individualism_collectivism: 1,
+      idealism_realism: -3,
+      conservatism_progressivism: -3,
+      materialism_spiritualism: 4,
+    },
+  },
+  {
+    id: 5,
+    name: "프리드리히 니체",
+    period: "근대 독일",
+    description:
+      "'신은 죽었다'고 선언하며 기존의 도덕과 가치관에 도전했습니다. 위버멘시(초인)가 되어 스스로의 가치를 창조하는 삶을 강조한 독창적인 철학자입니다.",
+    quote: "나를 죽이지 못하는 것은 나를 더 강하게 만들 뿐이다.",
+    scores: {
+      rationalism_empiricism: 2,
+      individualism_collectivism: -5,
+      idealism_realism: 5,
+      conservatism_progressivism: 5,
+      materialism_spiritualism: -1,
+    },
+  },
+  {
+    id: 6,
+    name: "공자",
+    period: "고대 중국",
+    description:
+      "인(仁)과 예(禮)를 중심으로 한 유교 사상을 창시했습니다. 개인의 수양과 사회적 관계의 조화를 통해 이상적인 사회를 만들 수 있다고 믿었습니다.",
+    quote: "자기가 원하지 않는 바를 남에게 행하지 말라.",
+    scores: {
+      rationalism_empiricism: 1,
+      individualism_collectivism: 5,
+      idealism_realism: 3,
+      conservatism_progressivism: -5,
+      materialism_spiritualism: 2,
+    },
+  },
+  {
+    id: 7,
+    name: "노자",
+    period: "고대 중국",
+    description:
+      "도교의 창시자로, '도(道)'와 '무위자연(無爲自然)' 사상을 통해 인위적인 것을 버리고 자연의 순리를 따르는 삶을 강조했습니다.",
+    quote: "가장 훌륭한 선은 물과 같다.",
+    scores: {
+      rationalism_empiricism: 5,
+      individualism_collectivism: 2,
+      idealism_realism: -2,
+      conservatism_progressivism: 1,
+      materialism_spiritualism: 5,
+    },
+  },
+  {
+    id: 8,
+    name: "장자",
+    period: "고대 중국",
+    description:
+      "노자의 사상을 계승 발전시킨 인물로, 자유로운 정신과 상대주의적 세계관을 강조했습니다. '호접지몽(胡蝶之夢)' 이야기로 유명합니다.",
+    quote: "만물은 모두 하나다.",
+    scores: {
+      rationalism_empiricism: 4,
+      individualism_collectivism: -4,
+      idealism_realism: -1,
+      conservatism_progressivism: 4,
+      materialism_spiritualism: 3,
+    },
+  },
 ];
 
 export const questions: Question[] = [
@@ -122,6 +198,104 @@ export const questions: Question[] = [
         text: "내면의 평화와 만족감을 얻고 스스로의 가치를 실현하는 것.",
         effects: {
           materialism_spiritualism: 1,
+          idealism_realism: -1,
+        },
+      },
+    ],
+  },
+  {
+    id: 5,
+    text: "엄격한 규칙과 도덕적 의무를 따르는 것이 혼란스러운 세상에서 올바른 길을 찾는 방법이라고 생각하시나요?",
+    answers: [
+      {
+        text: "그렇다. 보편적인 원칙은 모두에게 적용되어야 한다.",
+        effects: {
+          rationalism_empiricism: -1,
+          conservatism_progressivism: -1,
+        },
+      },
+      {
+        text: "아니다. 상황과 개인의 신념에 따라 유연하게 판단해야 한다.",
+        effects: {
+          rationalism_empiricism: 1,
+          conservatism_progressivism: 1,
+        },
+      },
+    ],
+  },
+  {
+    id: 6,
+    text: "사회적 통념이나 기존의 가치에 얽매이지 않고, 나만의 길을 개척하는 삶을 추구하시나요?",
+    answers: [
+      {
+        text: "네, 적극적으로 나만의 가치를 만들고 싶습니다.",
+        effects: {
+          individualism_collectivism: -2,
+          conservatism_progressivism: 2,
+        },
+      },
+      {
+        text: "아니요, 기존의 지혜와 질서 속에서 안정을 찾는 것이 더 좋습니다.",
+        effects: {
+          individualism_collectivism: 2,
+          conservatism_progressivism: -2,
+        },
+      },
+    ],
+  },
+  {
+    id: 7,
+    text: "개인의 발전도 중요하지만, 결국 사람은 가족과 사회 속에서 조화를 이루며 살아갈 때 가장 행복하다고 생각하시나요?",
+    answers: [
+      {
+        text: "매우 그렇다. 공동체와의 관계가 무엇보다 중요하다.",
+        effects: {
+          individualism_collectivism: 2,
+        },
+      },
+      {
+        text: "아니다. 개인의 독립성과 자아실현이 더 중요하다.",
+        effects: {
+          individualism_collectivism: -2,
+        },
+      },
+    ],
+  },
+  {
+    id: 8,
+    text: "복잡한 문제에 부딪혔을 때, 억지로 해결하려 하기보다 자연의 흐름에 맡기는 것이 더 나은 결과를 가져온다고 믿으시나요?",
+    answers: [
+      {
+        text: "네, 순리에 맡기는 것이 현명할 때가 많습니다.",
+        effects: {
+          rationalism_empiricism: 2,
+          materialism_spiritualism: 1,
+        },
+      },
+      {
+        text: "아니요, 적극적으로 개입하여 문제를 해결해야 합니다.",
+        effects: {
+          rationalism_empiricism: -2,
+          materialism_spiritualism: -1,
+        },
+      },
+    ],
+  },
+  {
+    id: 9,
+    text: "세상에 절대적인 진리란 없으며, 모든 것은 관점에 따라 달라질 수 있다고 생각하시나요?",
+    answers: [
+      {
+        text: "네, 모든 것은 상대적이라고 생각합니다.",
+        effects: {
+          conservatism_progressivism: 1,
+          idealism_realism: 1,
+        },
+      },
+      {
+        text: "아니요, 변하지 않는 보편적인 진리가 존재한다고 믿습니다.",
+        effects: {
+          conservatism_progressivism: -1,
           idealism_realism: -1,
         },
       },
