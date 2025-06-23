@@ -1,10 +1,6 @@
-"use client";
-
-import { useSearchParams } from "next/navigation";
 import { philosophers } from "@/app/lib/data";
 import { Philosopher, Score } from "@/app/lib/utils";
 import Link from "next/link";
-import { useMemo } from "react";
 
 function calculateDistance(userScore: Score, philosopherScore: Score): number {
   const keys: (keyof Score)[] = [
@@ -25,24 +21,20 @@ function calculateDistance(userScore: Score, philosopherScore: Score): number {
   return distance;
 }
 
-export default function ResultPage() {
-  const searchParams = useSearchParams();
+export default function ResultPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const userScore: Score = {
+    rationalism_empiricism: Number(searchParams.se || 0),
+    individualism_collectivism: Number(searchParams.ic || 0),
+    idealism_realism: Number(searchParams.ir || 0),
+    conservatism_progressivism: Number(searchParams.cp || 0),
+    materialism_spiritualism: Number(searchParams.ms || 0),
+  };
 
-  const userScore: Score = useMemo(
-    () => ({
-      rationalism_empiricism: Number(searchParams.get("se") || 0),
-      individualism_collectivism: Number(searchParams.get("ic") || 0),
-      idealism_realism: Number(searchParams.get("ir") || 0),
-      conservatism_progressivism: Number(searchParams.get("cp") || 0),
-      materialism_spiritualism: Number(searchParams.get("ms") || 0),
-    }),
-    [searchParams]
-  );
-
-  const result = useMemo<{
-    matchedPhilosopher: Philosopher | null;
-    similarityPercentage: number;
-  }>(() => {
+  const resultFn = () => {
     let bestMatch: Philosopher | null = null;
     let minDistance = Infinity;
 
@@ -61,7 +53,12 @@ export default function ResultPage() {
     );
 
     return { matchedPhilosopher: bestMatch, similarityPercentage: percentage };
-  }, [userScore]);
+  };
+
+  const result: {
+    matchedPhilosopher: Philosopher | null;
+    similarityPercentage: number;
+  } = resultFn();
 
   if (!result.matchedPhilosopher) {
     return (
